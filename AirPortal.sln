@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirPortal", "Source\AirPortal\AirPortal.csproj", "{BA8D80FB-F1F9-4073-9675-6E66A4A41D58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirPortalDisplay", "Source\AirPortalDisplay\AirPortalDisplay.csproj", "{99C82854-04DA-4FBF-BB80-E7275FA33DD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA8D80FB-F1F9-4073-9675-6E66A4A41D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA8D80FB-F1F9-4073-9675-6E66A4A41D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA8D80FB-F1F9-4073-9675-6E66A4A41D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA8D80FB-F1F9-4073-9675-6E66A4A41D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C82854-04DA-4FBF-BB80-E7275FA33DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C82854-04DA-4FBF-BB80-E7275FA33DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C82854-04DA-4FBF-BB80-E7275FA33DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C82854-04DA-4FBF-BB80-E7275FA33DD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

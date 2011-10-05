@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+  <id>1514</id>
+  <defaultcontrol>0</defaultcontrol>
+  <allowoverlay>yes</allowoverlay>
+  
+  <controls>
+    <control>
+      <description>Received Image</description>
+      <posX>0</posX>
+      <posY>0</posY>
+      <type>image</type>
+      <id>0</id>
+      <width>1280</width>
+      <height>720</height>
+      <texture>#Airportal.Image.Filename</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <align>center</align>
+      <valign>middle</valign>
+      <visible>string.equals(#Airportal.Image.Available,true)</visible>
+    </control>
+    <control>
+  	  <description>No Image label</description>
+      <type>label</type>
+      <id>1</id>
+      <posX>0</posX>
+      <posY>0</posY>
+      <width>1280</width>
+      <height>720</height>
+      <label>Sorry, no AirPortal image available</label>
+      <font>font18</font>
+      <textcolor>FFdddddd</textcolor>
+      <align>center</align>
+      <valign>middle</valign>
+      <visible>string.equals(#Airportal.Image.Available,false)</visible>
+    </control>
+  </controls>
+</window>
