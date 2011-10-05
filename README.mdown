@@ -45,3 +45,5 @@ Also displaying images can be improved a lot (save to disk? rotate? resize?) and
 Acknowledgement
 --------------------
 AirPortal is based on [airstream-media-player by Tom Thorpe.](http://code.google.com/p/airstream-media-player/) 
+
+It also uses [zeroconfignetservices](http://code.google.com/p/zeroconfignetservices/) to publish a Bonjour service.
