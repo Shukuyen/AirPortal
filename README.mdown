@@ -1,0 +1,47 @@
+AirPortal for MediaPortal
+=========================
+
+AirPortal is a plugin for popular medicenter software MediaPortal that acts as a client for Apples AirPlay (*Airplay is a registered trademark of Apple*).
+
+It consists of two plugins:
+
+1. **AirPortal** - a process plugin that publishes a Bonjour service and handles the communication with AirPlay devices.
+
+2. **AirPortalDisplay** - a window plugin that is used to display content sent from a device to the AirPortal plugin. At the moment content is sent to AirPortalDisplay via skin parameters, this should possibly be changed to loadParameter messages.
+
+
+<br />
+<br />
+
+Current plugin state
+--------------------
+At the moment the plugin is able to receive images from AirPlay devices and to show them on your MediaPortal.
+
+You can discuss this on the [MediaPortal forums](http://forum.team-mediaportal.com/watch-edit-videos-104/apple-airplay-mediaportal-91236/).
+
+
+<br />
+<br />
+
+Planned features
+--------------------
+Code to receive video is already in AirPortal thanks to airstream-media-player, but I didn't manage to play that in MediaPortal. This should be the next big feature, but I need help for it. Audio streaming will be much harder as Apple sends that encrypted.
+
+
+<br />
+<br />
+
+Help development
+--------------------
+I really need help with this plugin, especially when it comes to playing streamed video in MediaPortal. The online videos plugin might be a good base for that (buffering player that is able to play web streams). If you want to help please do :-)
+
+Also displaying images can be improved a lot (save to disk? rotate? resize?) and displaying more than one image is really slow: Share an image on the iPhone via AirPlay, then swipe to the next image. It will take long to appear in MediaPortal. This isn't due to the display code but the data from the client is delivered with delay. I don't know why that is.
+
+
+
+<br />
+<br />
+
+Acknowledgement
+--------------------
+AirPortal is based on [airstream-media-player by Tom Thorpe.](http://code.google.com/p/airstream-media-player/) 
