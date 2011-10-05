@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2.0</Version>
+  <Groups>
+    <Items>
+      <GroupItem Name="Default">
+        <DisplayName>Default</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Default</Description>
+        <Files>
+          <Items />
+        </Files>
+      </GroupItem>
+      <GroupItem Name="plugin_files">
+        <ParentGroup />
+        <DisplayName>Plugin Files</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>plugin_files</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>..\Source\AirPortal\bin\Release\AirPortal.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{22c8324f-f24a-4ae3-9c69-e255236cc09d}-AirPortal.dll</ZipFileName>
+              <DestinationFilename>%Base%\plugins\process\AirPortal.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>..\Source\AirPortalDisplay\bin\Release\AirPortalDisplay.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7d43b760-6c8d-4336-951d-920c9ccebc04}-AirPortalDisplay.dll</ZipFileName>
+              <DestinationFilename>%Base%\plugins\Windows\AirPortalDisplay.dll</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+      <GroupItem Name="skin_files">
+        <ParentGroup />
+        <DisplayName>Skin Files</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>skin_files</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="GenericSkinFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>..\Ressources\airportaldisplay.xml</LocalFileName>
+              <ZipFileName>Installer{GenericSkinFile}\{45f11afc-c36f-4f42-969a-caf1c900203c}-airportaldisplay.xml</ZipFileName>
+              <DestinationFilename>%Skin%\[DEFAULT]\airportaldisplay.xml</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+    </Items>
+  </Groups>
+  <Sections>
+    <Items>
+      <SectionItem Guid="6d9a058b-15e1-43e2-8a3a-12c6a4559c6e" Name="Welcome Screen" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header text">
+              <Value>Welcome to the Extension Installer for [Name]</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Description">
+              <Value>This will install [Name] version [Version] on your computer.
+It is recommended that you close all other applications before continuing.
+Click Next to continue or Cancel to exit Setup.</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Left part image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Welcome Screen</PanelName>
+        <WizardButtonsEnum>NextCancel</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="f91c42c5-8d60-484f-9bec-1a0ca87f36d1" Name="Install Section" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header Title">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Header title</Description>
+            </SectionParam>
+            <SectionParam Name="Header description">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Description of section, shown in under section title</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items>
+            <ActionItem Name="InstallFiles" ActionType="InstallFiles" ConditionGroup="">
+              <Params>
+                <Items />
+              </Params>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
+            </ActionItem>
+          </Items>
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Install Section</PanelName>
+        <WizardButtonsEnum>Next</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="b35c4795-35c2-4679-bc0c-1ae65b0f5588" Name="Setup Complete" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header text">
+              <Value>The Extension Installer Wizard has successfully installed [Name].</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Left part image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Show radio buttons">
+              <Value />
+              <ValueType>Bool</ValueType>
+              <Description>Use radiobutton in place of combobox</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Setup Complete</PanelName>
+        <WizardButtonsEnum>Finish</WizardButtonsEnum>
+      </SectionItem>
+    </Items>
+  </Sections>
+  <Dependencies>
+    <Items>
+      <DependencyItem>
+        <Type>MediaPortal</Type>
+        <Id />
+        <MinVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>27644</Revision>
+        </MinVersion>
+        <MaxVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>27644</Revision>
+        </MaxVersion>
+        <WarnOnly>false</WarnOnly>
+        <Message>requires MediaPortal version 1.1.6.27644 to 1.1.6.27644.</Message>
+        <Name>MediaPortal</Name>
+      </DependencyItem>
+    </Items>
+  </Dependencies>
+  <PluginDependencies>
+    <Items />
+  </PluginDependencies>
+  <GeneralInfo>
+    <Name>AirPortal</Name>
+    <Id>3ca2cddc-2758-45c8-a98e-1f8aca25f81f</Id>
+    <Author>Shukuyen</Author>
+    <HomePage>https://github.com/Shukuyen/AirPortal</HomePage>
+    <ForumPage>http://forum.team-mediaportal.com/watch-edit-videos-104/apple-airplay-mediaportal-91236/</ForumPage>
+    <UpdateUrl>https://raw.github.com/Shukuyen/AirPortal/master/Installer/update.xml</UpdateUrl>
+    <Version>
+      <Major>0</Major>
+      <Minor>1</Minor>
+      <Build>0</Build>
+      <Revision>0</Revision>
+    </Version>
+    <ExtensionDescription>Apple AirPlay client for MediaPortal</ExtensionDescription>
+    <VersionDescription />
+    <DevelopmentStatus>Alpha</DevelopmentStatus>
+    <OnlineLocation>https://raw.github.com/Shukuyen/AirPortal/master/Installer/AirPortal_0.1.mpe1</OnlineLocation>
+    <ReleaseDate>2011-10-05T22:31:13.0143366+02:00</ReleaseDate>
+    <Tags>airportal,apple</Tags>
+    <Location>D:\Documents\Visual Studio 2010\Projects\PluginDev\AirPortal\Installer\AirPortal_0.1.mpe1</Location>
+    <Params>
+      <Items>
+        <SectionParam Name="Icon">
+          <Value />
+          <ValueType>File</ValueType>
+          <Description>The icon file of the package (jpg,png,bmp)</Description>
+        </SectionParam>
+        <SectionParam Name="Online Icon">
+          <Value />
+          <ValueType>String</ValueType>
+          <Description>The icon file of the package stored online (jpg,png,bmp)</Description>
+        </SectionParam>
+        <SectionParam Name="Configuration file">
+          <Value />
+          <ValueType>Template</ValueType>
+          <Description>The file used to configure the extension.
+ If have .exe extension the will be executed
+ If have .dll extension used like MP plugin configuration</Description>
+        </SectionParam>
+        <SectionParam Name="Online Screenshots">
+          <Value />
+          <ValueType>String</ValueType>
+          <Description>Online stored screenshot urls separated by ; </Description>
+        </SectionParam>
+        <SectionParam Name="Force to uninstall on update">
+          <Value>yes</Value>
+          <ValueType>Bool</ValueType>
+          <Description>Show dialog and force to uninstall previous version when updating an extension. Should only be disabled if you are using an NSIS/MSI installer.</Description>
+        </SectionParam>
+      </Items>
+    </Params>
+  </GeneralInfo>
+  <UniqueFileList>
+    <Items>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>..\Source\AirPortal\bin\Release\AirPortal.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{22c8324f-f24a-4ae3-9c69-e255236cc09d}-AirPortal.dll</ZipFileName>
+        <DestinationFilename>%Base%\plugins\process\AirPortal.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>..\Source\AirPortalDisplay\bin\Release\AirPortalDisplay.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7d43b760-6c8d-4336-951d-920c9ccebc04}-AirPortalDisplay.dll</ZipFileName>
+        <DestinationFilename>%Base%\plugins\Windows\AirPortalDisplay.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="GenericSkinFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>..\Ressources\airportaldisplay.xml</LocalFileName>
+        <ZipFileName>Installer{GenericSkinFile}\{45f11afc-c36f-4f42-969a-caf1c900203c}-airportaldisplay.xml</ZipFileName>
+        <DestinationFilename>%Skin%\[DEFAULT]\airportaldisplay.xml</DestinationFilename>
+      </FileItem>
+    </Items>
+  </UniqueFileList>
+  <ProjectSettings>
+    <FolderGroups />
+    <ProjectFilename>AirPortal_0.1.xmp2</ProjectFilename>
+    <UpdatePath1>D:\Documents\Visual Studio 2010\Projects\PluginDev\AirPortal\Installer\update.xml</UpdatePath1>
+    <UpdatePath2 />
+    <UpdatePath3 />
+  </ProjectSettings>
+  <IsSkin>false</IsSkin>
+</PackageClass>
