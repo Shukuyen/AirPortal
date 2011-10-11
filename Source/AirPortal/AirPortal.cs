@@ -403,7 +403,8 @@ namespace AirPortal
                 GUIGraphicsContext.ResetLastActivity();
                 GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0, DISPLAY_WINDOW_ID, 0, null);
                 GUIWindowManager.SendThreadMessage(msg);
-            }else{
+            }
+            /*else{
                 GUIMessage msg = new GUIMessage();
                 msg.Label = tempFileName;
                 msg.SendToTargetWindow = true;
@@ -412,6 +413,7 @@ namespace AirPortal
                
                 GUIWindowManager.SendThreadMessage(msg);
                 }
+             */
             
         }
 

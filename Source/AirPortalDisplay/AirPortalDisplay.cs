@@ -19,9 +19,9 @@ namespace AirPortalDisplay
         public const string LOG_PREFIX = "[AIRPORTAL_DISPLAY] ";
         public const int WINDOW_ID = 1514;
 
-        int xres;
+     /*   int xres;
         WebBrowser PlayNowWindow;
-        
+      */  
         public string PluginName()
         {
             return PLUGIN_NAME;
@@ -118,7 +118,7 @@ namespace AirPortalDisplay
                     
                 }
                 g_Player.ShowFullScreenWindow();
-                return false;
+                return true;
             }
             else if (message.Message == GUIMessage.MessageType.GUI_MSG_LABEL_ADD && message.Label == "action")
             {
@@ -156,6 +156,7 @@ namespace AirPortalDisplay
                  
             
         }
+        /* using a web browser to play the movie
         public void playvideo( string url)
         {
          PlayNowWindow = new WebBrowser();
@@ -174,5 +175,6 @@ namespace AirPortalDisplay
         }
         void PlayNowWindow_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         { }
+         */
     }
 }
