@@ -114,6 +114,8 @@ namespace AirPortalDisplay
                 Log.Debug(message.Message.ToString());
                 //MessageBox.Show(message.Label);
                 //playvideo(message.Label2);
+                
+                g_Player.FullScreen = true;
                
                 if (g_Player.PlayVideoStream(message.Label2))
                 {
@@ -128,9 +130,12 @@ namespace AirPortalDisplay
                     }
 
                 }
-                
-                
-                g_Player.ShowFullScreenWindow();
+
+
+                g_Player.ShowFullScreenWindowVideoDefault();
+                GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_PLAYBACK_STARTED, 0, 0, 0, 0, 0, null);
+                msg.Label = message.Label2;
+                GUIWindowManager.SendThreadMessage(msg);
                 return true;
             }
             else if (message.Message == GUIMessage.MessageType.GUI_MSG_LABEL_ADD && message.Label == "action")
