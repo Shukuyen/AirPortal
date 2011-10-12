@@ -335,7 +335,7 @@ namespace AirPortal
             GUIMessage msg1 = new GUIMessage();
             msg1.Label = "video";
             msg1.Label2 = url;
-            //msg1.Label2 = position;
+            msg1.Label3 = position.ToString();
             msg1.SendToTargetWindow = true;
             msg1.TargetWindowId = DISPLAY_WINDOW_ID;
             msg1.Message = GUIMessage.MessageType.GUI_MSG_LABEL_ADD;
@@ -427,12 +427,12 @@ namespace AirPortal
         /// <param name="param">Any extra data that might go with that action (eg the seek position)</param>
         void theServer_playbackEvent(object sender, string action, string param)
         {
+            AirPortal.LogMessage("Action: " + action + " Param: " + param, LogType.Debug);
             //sendPlaybackEvent(action, param); //pass it on to the thread-safe method.
             GUIMessage msg1 = new GUIMessage();
             msg1.Label = "action";
             msg1.Label2 = action;
             msg1.Label3 = param;
-            //msg1.Label2 = position;
             msg1.SendToTargetWindow = true;
             msg1.TargetWindowId = DISPLAY_WINDOW_ID;
             msg1.Message = GUIMessage.MessageType.GUI_MSG_LABEL_ADD;

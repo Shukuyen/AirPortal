@@ -21,7 +21,10 @@ namespace AirPortalDisplay
 
      /*   int xres;
         WebBrowser PlayNowWindow;
-      */  
+      */
+
+        bool bplaying = false;
+
         public string PluginName()
         {
             return PLUGIN_NAME;
@@ -68,7 +71,7 @@ namespace AirPortalDisplay
             strButtonImage = String.Empty;
             strButtonImageFocus = String.Empty;
             strPictureImage = String.Empty;
-
+            bplaying = false;
             return false;
         }
 
@@ -85,6 +88,7 @@ namespace AirPortalDisplay
         // Plugin initialised, load skin file
         public override bool Init()
         {
+            bplaying = false;
           return Load(GUIGraphicsContext.Skin+@"\airportaldisplay.xml");
         }
 
@@ -110,41 +114,55 @@ namespace AirPortalDisplay
                 Log.Debug(message.Message.ToString());
                 //MessageBox.Show(message.Label);
                 //playvideo(message.Label2);
-                
-                if (!g_Player.PlayVideoStream(message.Label2))
+               
+                if (g_Player.PlayVideoStream(message.Label2))
+                {
+                    bplaying = true;
+                }
+                else
                 {
 
-                    g_Player.Play(message.Label2, g_Player.MediaType.Video);
-                    
+                    if (g_Player.Play(message.Label2, g_Player.MediaType.Video))
+                    { 
+                        bplaying = true; 
+                    }
+
                 }
+                
+                
                 g_Player.ShowFullScreenWindow();
                 return true;
             }
             else if (message.Message == GUIMessage.MessageType.GUI_MSG_LABEL_ADD && message.Label == "action")
             {
-        
-                if (message.Label2.Equals("pause"))
+                if (bplaying) 
                 {
-
-                    Log.Debug("pausing player");
-                    g_Player.Pause();
-                }
-                else if (message.Label2.Equals("play"))
-                {
-                    Log.Debug("playing player");
-                    //g_Player.
-                }
-                else if (message.Label2.Equals("stop"))
-                {
-                    Log.Debug("stopping player");
-                    g_Player.Stop();
-                }
-                else if (message.Label2.Equals("scrub"))
-                {
-                    if (message.Label2.Length > 0)//if the scrub position exists in the paramters (should be first arg)...  
+                    if (message.Label2.Equals("pause"))
                     {
-                        //g_Player.CurrentPosition = Convert.ToDouble(message.Label2[0]);   
-                        g_Player.SeekAbsolute(Convert.ToDouble(message.Label2));
+
+                        Log.Debug("pausing player");
+                        g_Player.Pause();
+                    }
+                    else if (message.Label2.Equals("play"))
+                    {
+                        Log.Debug("playing player");
+                        //g_Player.p
+                    }
+                    else if (message.Label2.Equals("stop"))
+                    {
+                        Log.Debug("stopping player");
+                        g_Player.Stop();
+                        bplaying = false;
+                    }
+                    else if (message.Label2.Equals("scrub"))
+                    {
+                        if (message.Label3.Length > 0)//if the scrub position exists in the paramters (should be first arg)...  
+                        {
+                        
+                            //g_Player.CurrentPosition = Convert.ToDouble(message.Label3[0]);  
+                            int ipercent = (int) Convert.ToDouble(message.Label3)*100;
+                            g_Player.SeekAsolutePercentage(ipercent);
+                        }
                     }
                 }
                 return true;
