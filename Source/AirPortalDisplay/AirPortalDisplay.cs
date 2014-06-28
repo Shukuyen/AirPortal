@@ -7,6 +7,9 @@ using MediaPortal.GUI.Library;
 using MediaPortal.Dialogs;
 using MediaPortal.Player;
 using System.Text.RegularExpressions;
+using System.Drawing;
+
+
 
 namespace AirPortalDisplay
 {
@@ -16,7 +19,11 @@ namespace AirPortalDisplay
         public const string LOG_PREFIX = "[AIRPORTAL_DISPLAY] ";
         public const int WINDOW_ID = 1514;
 
+     /*   int xres;
+        WebBrowser PlayNowWindow;
+      */
 
+        bool bplaying = false;
 
         public string PluginName()
         {
@@ -64,7 +71,7 @@ namespace AirPortalDisplay
             strButtonImage = String.Empty;
             strButtonImageFocus = String.Empty;
             strPictureImage = String.Empty;
-
+            bplaying = false;
             return false;
         }
 
@@ -81,6 +88,7 @@ namespace AirPortalDisplay
         // Plugin initialised, load skin file
         public override bool Init()
         {
+            bplaying = false;
           return Load(GUIGraphicsContext.Skin+@"\airportaldisplay.xml");
         }
 
@@ -94,5 +102,102 @@ namespace AirPortalDisplay
             }
             base.OnPageDestroy(new_windowId);
         }
+        private void GUIWindowManager_OnNewMessage(GUIMessage message)
+        {
+            Log.Debug(message.Message.ToString());
+        }
+        public override bool OnMessage(GUIMessage message)
+        {
+            
+            if (message.Message == GUIMessage.MessageType.GUI_MSG_LABEL_ADD && message.Label == "video")
+            {
+                Log.Debug(message.Message.ToString());
+                //MessageBox.Show(message.Label);
+                //playvideo(message.Label2);
+                
+                g_Player.FullScreen = true;
+               
+                if (g_Player.PlayVideoStream(message.Label2))
+                {
+                    bplaying = true;
+                }
+                else
+                {
+
+                    if (g_Player.Play(message.Label2, g_Player.MediaType.Video))
+                    { 
+                        bplaying = true; 
+                    }
+
+                }
+
+
+                g_Player.ShowFullScreenWindowVideoDefault();
+                GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_PLAYBACK_STARTED, 0, 0, 0, 0, 0, null);
+                msg.Label = message.Label2;
+                GUIWindowManager.SendThreadMessage(msg);
+                return true;
+            }
+            else if (message.Message == GUIMessage.MessageType.GUI_MSG_LABEL_ADD && message.Label == "action")
+            {
+                if (bplaying) 
+                {
+                    if (message.Label2.Equals("pause"))
+                    {
+
+                        Log.Debug("pausing player");
+                        g_Player.Pause();
+                    }
+                    else if (message.Label2.Equals("play"))
+                    {
+                        Log.Debug("playing player");
+                        //g_Player.p
+                    }
+                    else if (message.Label2.Equals("stop"))
+                    {
+                        Log.Debug("stopping player");
+                        g_Player.Stop();
+                        bplaying = false;
+                    }
+                    else if (message.Label2.Equals("scrub"))
+                    {
+                        if (message.Label3.Length > 0)//if the scrub position exists in the paramters (should be first arg)...  
+                        {
+                        
+                            //g_Player.CurrentPosition = Convert.ToDouble(message.Label3[0]);  
+                            int ipercent = (int) Convert.ToDouble(message.Label3)*100;
+                            g_Player.SeekAsolutePercentage(ipercent);
+                        }
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                return base.OnMessage(message);
+            }
+                 
+            
+        }
+        /* using a web browser to play the movie
+        public void playvideo( string url)
+        {
+         PlayNowWindow = new WebBrowser();
+            PlayNowWindow.Url = new Uri (url);
+            PlayNowWindow.Name = "PlayNowWindow";
+            PlayNowWindow.Size = new Size(800, 500);
+            PlayNowWindow.Location = new Point(0, 145);
+            GUIGraphicsContext.form.Controls.Add(PlayNowWindow);
+            PlayNowWindow.Visible = true;
+
+            PlayNowWindow.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(PlayNowWindow_DocumentCompleted);
+            GUIGraphicsContext.form.Focus();
+
+
+               
+        }
+        void PlayNowWindow_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        { }
+         */
     }
 }

@@ -308,7 +308,7 @@ namespace AirPortal
                     if (array.Count() > 1)
                     {
                         url = array[0].Trim();
-                        AirPortal.LogMessage("Attempting to play URL" + url, AirPortal.LogType.Debug);
+                        AirPortal.LogMessage("Attempting to play URL " + url, AirPortal.LogType.Debug);
 
                         //get the start position
                         double start = 0;

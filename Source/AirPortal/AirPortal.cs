@@ -18,7 +18,10 @@ using System.Drawing;
 using MediaPortal.Player;
 using System.IO;
 using System.Drawing.Imaging;
+
 using MediaPortal.Dialogs;
+
+
 
 namespace AirPortal
 {
@@ -36,6 +39,8 @@ namespace AirPortal
         bool publishing = false;
         NetService publishService = null;
         Server theServer = null;
+
+    
 
         /// <summary>
         /// Mediaportal log type
@@ -319,11 +324,28 @@ namespace AirPortal
                 position = 0;
             }
 
-            //g_Player.Play(url, g_Player.MediaType.Video);
-            
-            //sendPlaybackEvent("playUrl", url, position.ToString());
-        }
+            if (GUIWindowManager.ActiveWindow != DISPLAY_WINDOW_ID)
+            {
+                
 
+                GUIGraphicsContext.ResetLastActivity();
+                GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0, DISPLAY_WINDOW_ID, 0, null);
+                GUIWindowManager.SendThreadMessage(msg);
+            }
+            GUIMessage msg1 = new GUIMessage();
+            msg1.Label = "video";
+            msg1.Label2 = url;
+            msg1.Label3 = position.ToString();
+            msg1.SendToTargetWindow = true;
+            msg1.TargetWindowId = DISPLAY_WINDOW_ID;
+            msg1.Message = GUIMessage.MessageType.GUI_MSG_LABEL_ADD;
+
+            GUIWindowManager.SendThreadMessage(msg1);
+            //g_Player.Play(url, g_Player.MediaType.Video);
+            AirPortal.LogMessage("AirPortal wants to display an video ...", LogType.Debug);
+            //sendPlaybackEvent("playUrl", url, position.ToString());
+            theServer.sendStatusMessage("loading"); 
+        }
         /// <summary>
         /// Conforms to the delegate that the Server uses to sent the playImage event.
         /// Calls the setPictureBoxPicture() method to set the image in a thread-safe way. setPictureBoxPicture() also hides the video players and shows the picturebox
@@ -333,6 +355,8 @@ namespace AirPortal
         void theServer_playImage(object sender, Image theImage)
         {
             AirPortal.LogMessage("AirPortal wants to display an image ...", LogType.Debug);
+
+           
 
             // Create temp folder if it doesn't exist
             if (!Directory.Exists(Path.GetTempPath() + PLUGIN_NAME))
@@ -380,6 +404,17 @@ namespace AirPortal
                 GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0, DISPLAY_WINDOW_ID, 0, null);
                 GUIWindowManager.SendThreadMessage(msg);
             }
+            /*else{
+                GUIMessage msg = new GUIMessage();
+                msg.Label = tempFileName;
+                msg.SendToTargetWindow = true;
+                msg.TargetWindowId = DISPLAY_WINDOW_ID;
+                msg.Message = GUIMessage.MessageType.GUI_MSG_LABEL_ADD;
+               
+                GUIWindowManager.SendThreadMessage(msg);
+                }
+             */
+            
         }
 
         /// <summary>
@@ -392,7 +427,17 @@ namespace AirPortal
         /// <param name="param">Any extra data that might go with that action (eg the seek position)</param>
         void theServer_playbackEvent(object sender, string action, string param)
         {
+            AirPortal.LogMessage("Action: " + action + " Param: " + param, LogType.Debug);
             //sendPlaybackEvent(action, param); //pass it on to the thread-safe method.
+            GUIMessage msg1 = new GUIMessage();
+            msg1.Label = "action";
+            msg1.Label2 = action;
+            msg1.Label3 = param;
+            msg1.SendToTargetWindow = true;
+            msg1.TargetWindowId = DISPLAY_WINDOW_ID;
+            msg1.Message = GUIMessage.MessageType.GUI_MSG_LABEL_ADD;
+
+            GUIWindowManager.SendThreadMessage(msg1);
         }
 
         /// <summary>
